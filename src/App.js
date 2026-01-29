@@ -1,77 +1,62 @@
 import React, { useState } from 'react';
 
 const translations = {
-  cs: { flag: "🇨🇿", title: "⚡ BLESK.ai", subtitle: "Profi odpovědi bleskově", placeholder: "Vložte text od zákazníka...", button: "VYGENEROVAT ODPOVĚĎ 🚀", copy: "📋 Kopírovat", whatsapp: "💬 WhatsApp", copied: "Zkopírováno!", sections: {
-      painting: "Dobrý den, malování není problém. Termín mám volný příští týden. Cena 50-80 Kč/m2.",
-      water: "Zdravím, na instalatérské práce jsem k dispozici. Můžu dorazit zítra ráno.",
-      universal: "Dobrý den, děkuji za poptávku. Můžu se u vás zastavit na obhlídku tento čtvrtek v 16:00?"
-    }
-  },
-  de: { flag: "🇩🇪", title: "⚡ BLITZ.ai", subtitle: "Profi-Antworten sofort", placeholder: "Text od Kunden einfügen...", button: "ANTWORT GENERIEREN 🚀", copy: "📋 Kopieren", whatsapp: "💬 WhatsApp", copied: "Kopiert!", sections: {
-      painting: "Guten Tag, Malen ist kein Problem. Ich habe nächste Woche Zeit. Preis ca. 5-8 €/m2.",
-      water: "Hallo, ich bin für Klempnerarbeiten verfügbar. Ich kann morgen früh kommen.",
-      universal: "Guten Tag, danke für die Anfrage. Kann ich diesen Donnerstag um 16:00 Uhr zur Besichtigung kommen?"
-    }
-  },
-  en: { flag: "🇬🇧", title: "⚡ FLASH.ai", subtitle: "Pro answers instantly", placeholder: "Paste customer message...", button: "GENERATE RESPONSE 🚀", copy: "📋 Copy", whatsapp: "💬 WhatsApp", copied: "Copied!", sections: {
-      painting: "Hello, I can do the painting. I'm available next week. Price approx. 5-8 EUR/m2.",
-      water: "Hi, I'm available for plumbing. I can come tomorrow morning.",
-      universal: "Hello, thanks for your inquiry. Can I come for a site visit this Thursday at 4 PM?"
-    }
-  },
-  es: { flag: "🇪🇸", title: "⚡ RAYO.ai", subtitle: "Respuestas profesionales", placeholder: "Pegar mensaje del cliente...", button: "GENERAR RESPUESTA 🚀", copy: "📋 Copiar", whatsapp: "💬 WhatsApp", copied: "¡Copiado!", sections: {
-      painting: "Hola, puedo pintar sin problema. Tengo tiempo la próxima semana. Precio 5-8 €/m2.",
-      water: "Hola, estoy disponible para fontanería. Puedo ir mañana por la mañana.",
-      universal: "Hola, gracias por su consulta. ¿Puedo pasar a ver el trabajo este jueves a las 16:00?"
-    }
-  },
-  it: { flag: "🇮🇹", title: "⚡ LAMPO.ai", subtitle: "Risposte professionali", placeholder: "Incolla il messaggio...", button: "GENERA RISPOSTA 🚀", copy: "📋 Copia", whatsapp: "💬 WhatsApp", copied: "Copiato!", sections: {
-      painting: "Buongiorno, posso tinteggiare senza problemi. Sono libero la prossima settimana.",
-      water: "Ciao, sono disponibile per lavori idraulici. Posso venire domani mattina.",
-      universal: "Buongiorno, grazie per la richiesta. Posso venire per un sopralluogo questo giovedì alle 16:00?"
-    }
-  }
+  cs: { flag: "🇨🇿", roleQ: "Kdo jste?", client: "HLEDÁM ŘEMESLNÍKA 🏠", pro: "JSEM ŘEMESLNÍK 🛠️", back: "⬅ Zpět", send: "ODESLAT POPTÁVKU 🚀", gen: "GENEROVAT ODPOVĚĎ", payNote: "* Pro zobrazení čísla zákazníka si dobijte kredit.", sections: { painting: "Dobrý den, malování zvládnu příští týden...", water: "Zdravím, na instalatérské práce mám čas zítra...", universal: "Dobrý den, děkuji za poptávku. Můžu se stavit na obhlídku?" } },
+  en: { flag: "🇬🇧", roleQ: "Who are you?", client: "I NEED A PRO 🏠", pro: "I AM A PRO 🛠️", back: "⬅ Back", send: "SEND REQUEST 🚀", gen: "GENERATE RESPONSE", payNote: "* To see the customer's phone, top up your credit.", sections: { painting: "Hello, I can do the painting next week...", water: "Hi, I'm available for plumbing tomorrow...", universal: "Hello, thank you for your inquiry. Can I come for a visit?" } },
+  de: { flag: "🇩🇪", roleQ: "Wer sind Sie?", client: "PROFI SUCHEN 🏠", pro: "ICH BIN PROFI 🛠️", back: "⬅ Zurück", send: "ANFRAGE SENDEN 🚀", gen: "ANTWORT GENERIEREN", payNote: "* Um die Telefonnummer zu sehen, laden Sie Ihr Guthaben auf.", sections: { painting: "Guten Tag, Malen ist nächste Woche möglich...", water: "Hallo, ich bin morgen für Klempnerarbeiten frei...", universal: "Guten Tag, danke für die Anfrage. Kann ich zur Besichtigung kommen?" } },
+  es: { flag: "🇪🇸", roleQ: "¿Quién eres?", client: "BUSCO PROFESIONAL 🏠", pro: "SOY PROFESIONAL 🛠️", back: "⬅ Volver", send: "ENVIAR SOLICITUD 🚀", gen: "GENERAR RESPUESTA", payNote: "* Para ver el teléfono del cliente, recarga tu saldo.", sections: { painting: "Hola, puedo pintar la próxima semana...", water: "Hola, estoy disponible para fontanería mañana...", universal: "Hola, gracias por su consulta. ¿Puedo pasar a ver el trabajo?" } },
+  it: { flag: "🇮🇹", roleQ: "Chi sei?", client: "CERCO UN PRO 🏠", pro: "SONO UN PRO 🛠️", back: "⬅ Indietro", send: "INVIA RICHIESTA 🚀", gen: "GENERA RISPOSTA", payNote: "* Per vedere il telefono, ricarica il tuo credito.", sections: { painting: "Buongiorno, posso tinteggiare la prossima settimana...", water: "Ciao, sono disponibile per lavori idraulici domani...", universal: "Buongiorno, grazie per la richiesta. Posso venire per un sopralluogo?" } }
 };
 
 function App() {
   const [lang, setLang] = useState('cs');
+  const [role, setRole] = useState(null);
   const [zprava, setZprava] = useState('');
   const [odpoved, setOdpoved] = useState('');
   const t = translations[lang];
 
   const vygenerujOdpoved = () => {
-    if (!zprava) return;
     const txt = zprava.toLowerCase();
-    // Detekce klíčových slov napříč jazyky
     if (txt.match(/malov|paint|malen|pintar|tintegg/)) setOdpoved(t.sections.painting);
-    else if (txt.match(/voda|water|wasser|agua|acqua|trubk|pipe|rohr|tubo/)) setOdpoved(t.sections.water);
+    else if (txt.match(/voda|water|wasser|agua|acqua/)) setOdpoved(t.sections.water);
     else setOdpoved(t.sections.universal);
   };
 
-  return (
-    <div style={{ padding: '15px', fontFamily: 'sans-serif', textAlign: 'center', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '5px', marginBottom: '15px' }}>
-        {Object.keys(translations).map((l) => (
-          <button key={l} onClick={() => setLang(l)} style={{ padding: '8px 12px', borderRadius: '8px', border: lang === l ? '2px solid #000' : '1px solid #ccc', backgroundColor: 'white', cursor: 'pointer', fontSize: '18px' }}>
-            {translations[l].flag}
-          </button>
-        ))}
+  if (!role) {
+    return (
+      <div style={{ padding: '30px', textAlign: 'center', fontFamily: 'sans-serif', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
+        <div style={{ marginBottom: '20px' }}>
+          {Object.keys(translations).map(l => (
+            <button key={l} onClick={() => setLang(l)} style={{ fontSize: '20px', margin: '5px', cursor: 'pointer', border: lang === l ? '2px solid #000' : '1px solid #ccc', borderRadius: '5px', padding: '5px 10px' }}>{translations[l].flag}</button>
+          ))}
+        </div>
+        <h1 style={{ fontSize: '2.5rem' }}>⚡ BLESK.ai</h1>
+        <p style={{ color: '#666' }}>{t.roleQ}</p>
+        <button onClick={() => setRole('zakaznik')} style={{ width: '100%', maxWidth: '300px', padding: '20px', margin: '10px', backgroundColor: '#222', color: '#ffcc00', border: 'none', borderRadius: '15px', fontSize: '1.1rem', fontWeight: 'bold' }}>{t.client}</button>
+        <button onClick={() => setRole('remeslnik')} style={{ width: '100%', maxWidth: '300px', padding: '20px', margin: '10px', backgroundColor: '#ffcc00', color: '#222', border: 'none', borderRadius: '15px', fontSize: '1.1rem', fontWeight: 'bold' }}>{t.pro}</button>
       </div>
+    );
+  }
 
-      <header style={{ backgroundColor: '#222', padding: '20px', borderRadius: '15px', color: '#ffcc00', marginBottom: '20px', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}>
-        <h1 style={{ margin: 0 }}>{t.title}</h1>
-        <p style={{ margin: '5px 0 0', opacity: 0.9 }}>{t.subtitle}</p>
-      </header>
-
-      <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '15px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-        <textarea style={{ width: '100%', height: '100px', borderRadius: '10px', border: '2px solid #ddd', padding: '10px', fontSize: '16px', boxSizing: 'border-box' }} placeholder={t.placeholder} value={zprava} onChange={(e) => setZprava(e.target.value)} />
-        <button onClick={vygenerujOdpoved} style={{ width: '100%', backgroundColor: '#ffcc00', color: 'black', border: 'none', padding: '15px', borderRadius: '10px', fontSize: '18px', fontWeight: 'bold', marginTop: '10px', cursor: 'pointer' }}>{t.button}</button>
-
-        {odpoved && (
-          <div style={{ marginTop: '20px', padding: '15px', backgroundColor: '#fff9e6', borderRadius: '10px', border: '1px solid #ffcc00', textAlign: 'left' }}>
-            <p style={{ fontSize: '17px', marginBottom: '15px' }}>{odpoved}</p>
-            <button onClick={() => {navigator.clipboard.writeText(odpoved); alert(t.copied)}} style={{ width: '100%', padding: '10px', marginBottom: '10px', cursor: 'pointer', borderRadius: '5px', border: '1px solid #ccc' }}>{t.copy}</button>
-            <button onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(odpoved)}`, '_blank')} style={{ width: '100%', padding: '12px', backgroundColor: '#25D366', color: 'white', border: 'none', borderRadius: '5px', fontWeight: 'bold', cursor: 'pointer' }}>{t.whatsapp}</button>
+  return (
+    <div style={{ padding: '20px', fontFamily: 'sans-serif', textAlign: 'center', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
+      <button onClick={() => {setRole(null); setOdpoved(''); setZprava('');}} style={{ float: 'left', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}>{t.back}</button>
+      <div style={{ clear: 'both', paddingTop: '20px' }}>
+        <h2>{role === 'zakaznik' ? t.client : t.pro}</h2>
+        <textarea style={{ width: '100%', height: '120px', padding: '10px', borderRadius: '10px', boxSizing: 'border-box' }} placeholder={t.placeholder} value={zprava} onChange={(e) => setZprava(e.target.value)} />
+        
+        {role === 'zakaznik' ? (
+          <button onClick={() => alert("Odesláno!")} style={{ width: '100%', padding: '15px', backgroundColor: '#222', color: 'white', marginTop: '10px', borderRadius: '10px', fontWeight: 'bold' }}>{t.send}</button>
+        ) : (
+          <div style={{ marginTop: '10px' }}>
+            <button onClick={vygenerujOdpoved} style={{ width: '100%', padding: '15px', backgroundColor: '#ffcc00', color: 'black', borderRadius: '10px', fontWeight: 'bold', border: 'none' }}>{t.gen}</button>
+            {odpoved && (
+              <div style={{ marginTop: '20px', padding: '15px', backgroundColor: 'white', borderRadius: '10px', border: '1px solid #ffcc00', textAlign: 'left' }}>
+                <p>{odpoved}</p>
+                <p style={{ fontSize: '0.8rem', color: 'red', fontWeight: 'bold' }}>{t.payNote}</p>
+                <button style={{ width: '100%', padding: '10px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px' }}>💳 DOBÍT KREDIT (50 Kč)</button>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -80,3 +65,4 @@ function App() {
 }
 
 export default App;
+          
